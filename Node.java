@@ -1,13 +1,13 @@
 public class Node{
 
+  private String data;
+  private Node next, prev;
+  
   public Node(String value, Node n, Node p){
     data = value;
     next = n;
     prev = p;
   }
-
-  private String data;
-  private Node next, prev;
 
 //data
   public String getData(){
