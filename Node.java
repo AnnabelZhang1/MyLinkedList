@@ -21,22 +21,29 @@ public class Node{
   }
 
 //next
-  public getNext(next){
+  public getNext(){
     return next;
   }
 
-  public setNext(next){
-  
+  public setNext(Node value){
+    Node next1 = next;
+    next = value;
+    return next1;
   }
 
 //prev
-  public getPrev(prev){
-    return Node;
+  public getPrev(){
+    return prev;
   }
 
-  public setPrev(prev){
-
+  public setPrev(Node value){
+    Node prev1 = prev;
+    prev = value;
+    return prev1;
   }
 
+  public String toString(){
+    return "" + getData();
+  }
 }
 //write get/set methods for all three instance variables(data, next, prev)
