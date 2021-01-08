@@ -19,8 +19,10 @@ public class MyLinkedList{
       throw new IndexOutOfBoundsException();
     else{
       Node current = start;
-      for (current; current < index; current++)
-        current.getNext();
+      for (int count = 0; count < index; count++){
+        if (current != null)
+          current = current.getNext();
+      }
       return current;
     }
   }
@@ -50,29 +52,29 @@ public class MyLinkedList{
       atIndex(index);
       size++;
 
-      n.setPrev(start.prev());
-      if (start.prev() != null)
-        (start.prev()).setNext(n);
+      n.setPrev(start.setPrev());
+      if (start.setPrev() != null)
+        (start.setPrev()).setNext(n);
       n.setNext(start);
-      start.setPrev(temp);
+      start.setPrev(n);
     }
   }
 
   public String get(int index){
     Node i = atIndex(index);
-    return i.data();
+    return i.getData();
   }
-
+/*
   public String set(int index, String value){
     if (index < 0 || index >= size())
       throw new IndexOutOfBoundsException("Got index:" + index + "but size is" + size());
     else{
       if (index == 0){
         Node n = new Node(value);
-        next = start.getNext();
-        prev = null;
-        next.setPrev(n);
-        start = n
+        n.setData(start.getNext());
+        n.setPrev(null);
+        n.setNext(setPrev(n));
+        start = n;
       }
       else if (index == size() - 1){
         add(value);
@@ -86,7 +88,7 @@ public class MyLinkedList{
     }
     return get(index);
   }
-
+*/
   public String toString(){
     String output = "{";
     Node current = start;
@@ -115,11 +117,14 @@ public class MyLinkedList{
     output += "}";
     return output;
   }
-/*
-  public void main(String[] args){
 
+  public void main(String[] args){
+    MyLinkedList a = new MyLinkedList();
+    a.add("universal peace");
+    System.out.println(a.size());
+    System.out.println(a.toString());
   }
-*/
+
 }
 
 //tostring if uses whilenext, doesn't say whether double linked is correctly linked
