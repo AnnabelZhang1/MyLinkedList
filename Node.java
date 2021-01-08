@@ -2,22 +2,20 @@ public class Node{
 
   private String data;
   private Node next, prev;
-  
-  public Node(String value, Node n, Node p){
+
+  public Node(String value){
     data = value;
-    next = n;
-    prev = p;
+    next = null;
+    prev = null;
   }
 
 //data
-  public String getData(){
+  public getData(){
     return data;
   }
 
-  public String setData(String value){
-    String old = data;
+  public void setData(String value){
     data = value;
-    return old;
   }
 
 //next
@@ -25,10 +23,8 @@ public class Node{
     return next;
   }
 
-  public setNext(Node value){
-    Node next1 = next;
+  public void setNext(Node value){
     next = value;
-    return next1;
   }
 
 //prev
@@ -36,14 +32,8 @@ public class Node{
     return prev;
   }
 
-  public setPrev(Node value){
-    Node prev1 = prev;
+  public void setPrev(Node value){
     prev = value;
-    return prev1;
   }
-
-  public String toString(){
-    return "" + getData();
-  }
+  
 }
-//write get/set methods for all three instance variables(data, next, prev)
