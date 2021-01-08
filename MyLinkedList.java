@@ -57,25 +57,68 @@ public class MyLinkedList{
       start.setPrev(temp);
     }
   }
-/*
-  public String get(int index){
 
+  public String get(int index){
+    Node i = atIndex(index);
+    return i.data();
   }
 
   public String set(int index, String value){
-
+    if (index < 0 || index >= size())
+      throw new IndexOutOfBoundsException("Got index:" + index + "but size is" + size());
+    else{
+      if (index == 0){
+        Node n = new Node(value);
+        next = start.getNext();
+        prev = null;
+        next.setPrev(n);
+        start = n
+      }
+      else if (index == size() - 1){
+        add(value);
+      }
+      else{
+        Node n = atIndex(index);
+        Node n1 = new Node(value);
+        (n.getNext()).setPrev(n1);
+        (n.getPrev()).setNext(n1);
+      }
+    }
+    return get(index);
   }
 
   public String toString(){
-    String output = "[";
+    String output = "{";
     Node current = start;
-    while (start.getNext() != null){
-      output += start.getNext() + ", ";
+
+    while (current != null){
+      output += current.toString();
+      if (current.getNext() != null)
+        output += ", ";
+      current = current.getNext();
     }
-    output += "]";
+
+    output += "}";
     return output;
   }
 
+  public String toReversed(){
+    String output = "{";
+    Node current = end;
+    while (current != null){
+      output += current.toString();
+      if (current.getPrev() != null)
+        output += ", ";
+      current = current.getPrev();
+    }
+
+    output += "}";
+    return output;
+  }
+/*
+  public void main(String[] args){
+
+  }
 */
 }
 
