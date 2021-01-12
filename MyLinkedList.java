@@ -120,6 +120,43 @@ public class MyLinkedList{
 
 // PART II
 
+  public String remove(int index){
+    if (index < 0 || index >= size())
+      throw new IndexOutOfBoundsException("Got index:" + index + "but size is" + size());
+
+    String first = start.getData();
+    if (size() == 1){
+      start = null;
+      end = null;
+      size = 0;
+    }
+    else if (size() > 1 && index == 0){ //remove head
+      Node current = start.getNext();
+      current.setPrev(null);
+      start = current;
+      size--;
+    }
+    if (size() > 1 && index == size - 1){ //remove tail
+      first = end.getData();
+      Node current = end.getPrev();
+      current.setNext(null);
+      end = current;
+      size--;
+    }
+    if (size() > 1 && index > 0 && index < size() - 1){ //remove middle
+      Node current = start;
+      for (int i = 0; i < index; i++)
+        current =current .getNext();
+      first = current.getData();
+      Node previous = current.getPrev();
+      Node next = current.getNext();
+      previous.setNext(next);
+      next.setPrev(previous);
+      size--;
+    }
+    return first;
+  }
+
   public static void main(String[] args){
     System.out.println("PART ONE TEST:");
     MyLinkedList a = new MyLinkedList();
