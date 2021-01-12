@@ -12,10 +12,11 @@ public class MyLinkedList{
   public int size(){
     return size;
   }
+// PART I
 
 //helper
   private Node atIndex(int index){
-    if (index < 0 || index > size())
+    if (index < 0 || index >= size())
       throw new IndexOutOfBoundsException();
     else{
       Node current = start;
@@ -29,34 +30,43 @@ public class MyLinkedList{
 //
 
   public boolean add(String value){
-    if (size != 0){
-      Node n = new Node(value);
-      end.setNext(n);
-      n.setPrev(end);
-      end = n;
-      size++;
+    size++;
+    if (start == null) {
+        start = new Node(value);
+        end = start;
+        return true;
     }
-    else{
-      Node n = new Node(value);
-      end = n;
-      size++;
-    }
+    Node temp = new Node(value);
+    end.setNext(temp);
+    temp.setPrev(end);
+    end = temp;
     return true;
   }
 
   public void add(int index, String value){
+    if (index < 0 || index > size())
+      throw new IndexOutOfBoundsException("index" + index + "is not within size");
+
     if (index == size())
       add(value);
+    else if (index == 0){
+      Node temp = new Node(value);
+      temp.setNext(start);
+      start.setPrev(temp);
+      start = temp;
+      size++;
+    }
     else{
-      Node n = new Node(value);
+      Node temp = new Node(value);
       atIndex(index);
       size++;
 
-      n.setPrev(start.setPrev());
-      if (start.setPrev() != null)
-        (start.setPrev()).setNext(n);
-      n.setNext(start);
-      start.setPrev(n);
+      temp.setPrev(start.getPrev());
+      if (start.getPrev() != null)
+        (start.getPrev()).setNext(temp);
+      temp.setNext(start);
+      start.setPrev(temp);
+      size++;
     }
   }
 
@@ -64,37 +74,26 @@ public class MyLinkedList{
     Node i = atIndex(index);
     return i.getData();
   }
-/*
+
   public String set(int index, String value){
     if (index < 0 || index >= size())
       throw new IndexOutOfBoundsException("Got index:" + index + "but size is" + size());
-    else{
-      if (index == 0){
-        Node n = new Node(value);
-        n.setData(start.getNext());
-        n.setPrev(null);
-        n.setNext(setPrev(n));
-        start = n;
-      }
-      else if (index == size() - 1){
-        add(value);
-      }
-      else{
-        Node n = atIndex(index);
-        Node n1 = new Node(value);
-        (n.getNext()).setPrev(n1);
-        (n.getPrev()).setNext(n1);
-      }
-    }
-    return get(index);
+
+    String original = get(index);
+    Node current = start;
+    for (int i = 0; i < index; i++)
+      current = current.getNext();
+    current.setData(value);
+
+    return original;
   }
-*/
+
   public String toString(){
     String output = "{";
     Node current = start;
 
     while (current != null){
-      output += current.toString();
+      output += current.getData();
       if (current.getNext() != null)
         output += ", ";
       current = current.getNext();
@@ -104,11 +103,12 @@ public class MyLinkedList{
     return output;
   }
 
-  public String toReversed(){
+  public String toStringReversed(){
     String output = "{";
     Node current = end;
+
     while (current != null){
-      output += current.toString();
+      output += current.getData();
       if (current.getPrev() != null)
         output += ", ";
       current = current.getPrev();
@@ -118,11 +118,38 @@ public class MyLinkedList{
     return output;
   }
 
-  public void main(String[] args){
+// PART II
+
+  public static void main(String[] args){
+    System.out.println("PART ONE TEST:");
     MyLinkedList a = new MyLinkedList();
-    a.add("universal peace");
-    System.out.println(a.size());
-    System.out.println(a.toString());
+    a.add("Universal Peace");
+    System.out.println(a.size()); //Prints 1
+    System.out.println(a.get(0)); //Prints Universal Peace
+    a.add(0, "Adeptus Temptation");
+    System.out.println(a.size()); //Prints 2
+    System.out.println(a.get(0)); //Prints Adeptus Temptation
+    System.out.println(a.toString()); //Prints {Adeptus Temptation, Universal Peace}
+    a.add("Cream Stew"); //{Adeptus Temptation, Universal Peace, Cream Stew}
+    a.set(0, "Jade Parcels"); //{Jade Parcels, Universal Peace, Cream Stew}
+    a.set(1, "Goulash"); //{Jade Parcels, Goulash, Cream Stew}
+    System.out.println(a.get(1)); //Prints Goulash
+    System.out.println(a.get(2)); //Prints Cream Stew
+    System.out.println(a.toString()); //Prints {Jade Parcels, Goulash, Cream Stew}
+    System.out.println(a.toStringReversed()); //Prints {Cream Stew, Goulash, Jade Parcels}
+
+    System.out.println();
+
+    System.out.println("PART TWO TEST:");
+    MyLinkedList b = new MyLinkedList();
+    b.add("0"); b.add("1"); b.add("2"); b.add("3"); b.add("4");
+    b.remove(0);
+    b.remove(3);
+    System.out.println(b.toString()); //Prints {1, 2, 3}
+    MyLinkedList c = new MyLinkedList();
+    c.add("Almond Tofu"); c.add("Emergency Food?");
+    a.extend(c);
+    System.out.println(a.toString()); //Prints {Jade Parcels, Goulash, Cream Stew, Almond Tofu, Emergency Food?}
   }
 
 }
