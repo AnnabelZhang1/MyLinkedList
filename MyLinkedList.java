@@ -187,9 +187,9 @@ public class MyLinkedList{
     System.out.println(a.size()); //Prints 2
     System.out.println(a.get(0)); //Prints Adeptus Temptation
     System.out.println(a.toString()); //Prints {Adeptus Temptation, Universal Peace}
-    a.add("Cream Stew"); //{Adeptus Temptation, Universal Peace, Cream Stew}
-    a.set(0, "Jade Parcels"); //{Jade Parcels, Universal Peace, Cream Stew}
-    a.set(1, "Goulash"); //{Jade Parcels, Goulash, Cream Stew}
+    a.add("Cream Stew");
+    a.set(0, "Jade Parcels");
+    a.set(1, "Goulash");
     System.out.println(a.get(1)); //Prints Goulash
     System.out.println(a.get(2)); //Prints Cream Stew
     System.out.println(a.toString()); //Prints {Jade Parcels, Goulash, Cream Stew}
@@ -210,6 +210,3 @@ public class MyLinkedList{
   }
 
 }
-
-//tostring if uses whilenext, doesn't say whether double linked is correctly linked
-//make another toString that is reversed to check
