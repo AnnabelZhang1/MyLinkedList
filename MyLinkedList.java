@@ -157,6 +157,26 @@ public class MyLinkedList{
     return first;
   }
 
+  public void extend(MyLinkedList other){
+    if (size == 0 && other.size != 0){ //one empty one not
+      start = other.start;
+      end = other.end;
+      other.start = null;
+      other.end = null;
+      size = other.size;
+      other.size = 0;
+    }
+    if (size > 0 && other.size > 0){ //both not empty
+      end.setNext(other.start);
+      (other.start).setPrev(end);
+      end = other.end;
+      other.end = null;
+      other.start = null;
+      size = size + other.size;
+      other.size = 0;
+    }
+  }
+
   public static void main(String[] args){
     System.out.println("PART ONE TEST:");
     MyLinkedList a = new MyLinkedList();
